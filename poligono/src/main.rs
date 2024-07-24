@@ -29,4 +29,5 @@ fn main() {
     framebuffer.polygon(&poly2);
 
     framebuffer.write_bmp("out.bmp").unwrap();
+    println!("Image saved as out.bmp");
 }

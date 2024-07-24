@@ -16,7 +16,7 @@ impl Line for Framebuffer {
         let mut y = y0 as i32;
 
         loop {
-            self.point(x as usize, y as usize);
+            self.point(x as usize, self.height - 1 - y as usize);
             if x == x1 as i32 && y == y1 as i32 {
                 break;
             }
