@@ -1,6 +1,5 @@
 use crate::framebuffer::Framebuffer;
 use crate::line::Line;
-use std::cmp;
 
 pub trait Polygon {
     fn polygon(&mut self, vertices: &[(usize, usize)]);
@@ -25,8 +24,8 @@ impl Polygon for Framebuffer {
         let mut max_y = vertices[0].1;
 
         for &(_, y) in vertices.iter().skip(1) {
-            min_y = cmp::min(min_y, y);
-            max_y = cmp::max(max_y, y);
+            min_y = min_y.min(y);
+            max_y = max_y.max(y);
         }
 
         for y in min_y..=max_y {
@@ -49,7 +48,7 @@ impl Polygon for Framebuffer {
                     let start = chunk[0];
                     let end = chunk[1];
                     for x in start..=end {
-                        self.point(x, y);
+                        self.point(x, self.height - 1 - y);
                     }
                 }
             }
